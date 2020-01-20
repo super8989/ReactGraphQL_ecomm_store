@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text } from 'gestalt';
+import { Box, Text, Heading, Image } from 'gestalt';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => (
@@ -17,6 +17,19 @@ const Navbar = () => (
 			<Text size='xl' color='white'>
 				Sign In
 			</Text>
+		</NavLink>
+
+		{/* Title and Logo */}
+		<NavLink to='/'>
+			<Image
+				alt='brewery logo'
+				naturalHeight={1}
+				naturalWidth={1}
+				src='./icons/logo.svg'
+			/>
+			<Heading size='xs' color='lightGray'>
+				Sam's Brewery
+			</Heading>
 		</NavLink>
 
 		{/* Sign Up Link */}
