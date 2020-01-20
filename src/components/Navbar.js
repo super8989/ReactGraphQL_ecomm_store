@@ -21,15 +21,19 @@ const Navbar = () => (
 
 		{/* Title and Logo */}
 		<NavLink to='/'>
-			<Image
-				alt='brewery logo'
-				naturalHeight={1}
-				naturalWidth={1}
-				src='./icons/logo.svg'
-			/>
-			<Heading size='xs' color='lightGray'>
-				Sam's Brewery
-			</Heading>
+			<Box display='flex' alignItems='center'>
+				<Box margin={2} height={50} width={50}>
+					<Image
+						alt='brewery logo'
+						naturalHeight={1}
+						naturalWidth={1}
+						src='./icons/logo.svg'
+					/>
+				</Box>
+				<Heading size='xs' color='lightGray'>
+					Sam's Brewery
+				</Heading>
+			</Box>
 		</NavLink>
 
 		{/* Sign Up Link */}
