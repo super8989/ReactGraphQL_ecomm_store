@@ -7,17 +7,19 @@ import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Checkout from './components/Checkout';
 
-import './index.css';
+import 'gestalt/dist/gestalt.css';
 import * as serviceWorker from './serviceWorker';
 
 const Root = () => (
 	<Router>
-		<Switch>
-			<Route component={App} exact path='/' />
-			<Route component={Signin} path='/signin' />
-			<Route component={Signup} path='/signup' />
-			<Route component={Checkout} path='/checkout' />
-		</Switch>
+		<>
+			<Switch>
+				<Route component={App} exact path='/' />
+				<Route component={Signin} path='/signin' />
+				<Route component={Signup} path='/signup' />
+				<Route component={Checkout} path='/checkout' />
+			</Switch>
+		</>
 	</Router>
 );
 
