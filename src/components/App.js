@@ -142,7 +142,7 @@ class App extends Component {
 					))}
 				</Box>
 				{/* <Spinner show={loadingBrands} accessibilityLabel='Loading Spinner' /> */}
-				{loadingBrands && <Loader />}
+				<Loader show={loadingBrands} />
 			</Container>
 		);
 	}
