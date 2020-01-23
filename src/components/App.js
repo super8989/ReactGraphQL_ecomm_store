@@ -11,8 +11,9 @@ import {
 	Spinner
 } from 'gestalt';
 import { Link } from 'react-router-dom';
-
 import Strapi from 'strapi-sdk-javascript/build/main';
+
+import Loader from './Loader';
 
 import './App.css';
 
@@ -140,7 +141,8 @@ class App extends Component {
 						</Box>
 					))}
 				</Box>
-				<Spinner show={loadingBrands} accessibilityLabel='Loading Spinner' />
+				{/* <Spinner show={loadingBrands} accessibilityLabel='Loading Spinner' /> */}
+				{loadingBrands && <Loader />}
 			</Container>
 		);
 	}
