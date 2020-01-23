@@ -54,7 +54,10 @@ class App extends Component {
 
 	filteredBrands = ({ searchTerm, brands }) => {
 		return brands.filter(brand => {
-			return brand.name.toLowerCase().includes(searchTerm.toLowerCase());
+			return (
+				brand.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+				brand.description.toLowerCase().includes(searchTerm.toLowerCase())
+			);
 		});
 	};
 
