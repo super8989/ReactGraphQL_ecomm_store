@@ -72,6 +72,7 @@ class App extends Component {
 						id='searchField'
 						accessibilityLabel='Brands Search Field'
 						onChange={this.handleChange}
+						value={searchTerm}
 						placeholder='Search Brands'
 					/>
 					<Box margin={3}>
