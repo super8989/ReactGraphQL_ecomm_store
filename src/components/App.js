@@ -6,7 +6,8 @@ import {
 	Card,
 	Image,
 	Text,
-	SearchField
+	SearchField,
+	Icon
 } from 'gestalt';
 import { Link } from 'react-router-dom';
 
@@ -52,7 +53,7 @@ class App extends Component {
 	};
 
 	render() {
-		const { brands } = this.state;
+		const { brands, searchTerm } = this.state;
 
 		return (
 			<Container>
@@ -64,6 +65,14 @@ class App extends Component {
 						onChange={this.handleChange}
 						placeholder='Search Brands'
 					/>
+					<Box margin={3}>
+						<Icon
+							icon='filter'
+							color={searchTerm ? 'orange' : 'gray'}
+							size={20}
+							accessibilityLabel='Filter'
+						/>
+					</Box>
 				</Box>
 
 				{/* Brands Section */}
