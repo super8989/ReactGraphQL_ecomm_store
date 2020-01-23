@@ -7,7 +7,8 @@ import {
 	Image,
 	Text,
 	SearchField,
-	Icon
+	Icon,
+	Spinner
 } from 'gestalt';
 import { Link } from 'react-router-dom';
 
@@ -21,7 +22,8 @@ const strapi = new Strapi(apiUrl);
 class App extends Component {
 	state = {
 		brands: [],
-		searchTerm: ''
+		searchTerm: '',
+		loadingBrands: true
 	};
 
 	async componentDidMount() {
@@ -41,9 +43,10 @@ class App extends Component {
 				}
 			});
 			console.log(response);
-			this.setState({ brands: response.data.brands });
+			this.setState({ brands: response.data.brands, loadingBrands: false });
 		} catch (err) {
 			console.error(err);
+			this.setState({ loadingBrands: false });
 		}
 	}
 
@@ -62,7 +65,7 @@ class App extends Component {
 	};
 
 	render() {
-		const { searchTerm } = this.state;
+		const { searchTerm, loadingBrands } = this.state;
 
 		return (
 			<Container>
@@ -137,6 +140,7 @@ class App extends Component {
 						</Box>
 					))}
 				</Box>
+				<Spinner show={loadingBrands} accessibilityLabel='Loading Spinner' />
 			</Container>
 		);
 	}
