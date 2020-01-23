@@ -50,7 +50,17 @@ class App extends Component {
 					</Heading>
 				</Box>
 				{/* Brands */}
-				<Box display='flex' justifyContent='around'>
+				<Box
+					dangerouslySetInlineStyle={{
+						__style: {
+							backgroundColor: '#d6c8ec'
+						}
+					}}
+					shape='rounded'
+					wrap
+					display='flex'
+					justifyContent='around'
+				>
 					{brands.map(brand => (
 						<Box margin={2} width={200} key={brand._id}>
 							<Card
