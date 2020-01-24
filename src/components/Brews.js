@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Strapi from 'strapi-sdk-javascript/build/main';
 import { Box, Heading, Text, Image, Card, Button } from 'gestalt';
-import { Link } from 'react-router-dom';
 
 const apiUrl = process.env.API_URL || 'http://localhost:1337/';
 const strapi = new Strapi(apiUrl);
@@ -24,6 +23,7 @@ class Brews extends Component {
               brews {
                 _id
                 name
+                description
                 image {
                   url
                 }
@@ -94,13 +94,19 @@ class Brews extends Component {
 										justifyContent='center'
 										direction='column'
 									>
-										<Text weight='bold' size='xl'>
-											{brew.name}
-										</Text>
+										<Box marginBottom={2}>
+											<Text weight='bold' size='xl'>
+												{brew.name}
+											</Text>
+										</Box>
 										<Text>{brew.description}</Text>
-										<Text weight='bold' size='xl'>
-											<Link to={`/${brew._id}`}>See Brews</Link>
-										</Text>
+										<Text color='darkGray'>${brew.price}</Text>
+
+										<Box marginTop={2}>
+											<Text weight='bold' size='xl'>
+												<Button color='blue' text='Add to Cart' />
+											</Text>
+										</Box>
 									</Box>
 								</Card>
 							</Box>
