@@ -7,8 +7,7 @@ import {
 	Image,
 	Text,
 	SearchField,
-	Icon,
-	Spinner
+	Icon
 } from 'gestalt';
 import { Link } from 'react-router-dom';
 import Strapi from 'strapi-sdk-javascript/build/main';
