@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Strapi from 'strapi-sdk-javascript/build/main';
+import { Box, Heading, Text, Image, Card, Button } from 'gestalt';
 
 const apiUrl = process.env.API_URL || 'http://localhost:1337/';
 const strapi = new Strapi(apiUrl);
@@ -44,7 +45,24 @@ class Brews extends Component {
 	}
 
 	render() {
-		return <div>Brews</div>;
+		const { brand } = this.state;
+
+		return (
+			<Box
+				marginTop={4}
+				display='flex'
+				justifyContent='center'
+				alignItems='start'
+			>
+				{/* Brews Section */}
+				<Box display='flex' direction='column' alignItems='center'>
+					{/* Brews Heading */}
+					<Box margin={2}>
+						<Heading color='blue'>{brand}</Heading>
+					</Box>
+				</Box>
+			</Box>
+		);
 	}
 }
 
