@@ -5,6 +5,11 @@ const apiUrl = process.env.API_URL || 'http://localhost:1337/';
 const strapi = new Strapi(apiUrl);
 
 class Brews extends Component {
+	state = {
+		brews: [],
+		brand: ''
+	};
+
 	async componentDidMount() {
 		// console.log(this.props.match.params.brandId);
 		try {
@@ -28,7 +33,11 @@ class Brews extends Component {
           `
 				}
 			});
-			console.log(response);
+			// console.log(response);
+			this.setState({
+				brews: response.data.brand.brews,
+				brand: response.data.brand.name
+			});
 		} catch (err) {
 			console.error(err);
 		}
