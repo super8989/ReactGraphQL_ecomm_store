@@ -68,6 +68,7 @@ class Brews extends Component {
 								backgroundColor: '#bdcdd9'
 							}
 						}}
+						wrap
 						shape='rounded'
 						display='flex'
 						justifyContent='center'
