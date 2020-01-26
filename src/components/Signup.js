@@ -9,7 +9,7 @@ class Signup extends Component {
 	};
 
 	handleChange = ({ event, value }) => {
-		console.log({ event, value });
+		// console.log({ event, value });
 		event.persist();
 		this.setState({ [event.target.name]: value });
 	};
