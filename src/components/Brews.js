@@ -177,6 +177,12 @@ class Brews extends Component {
 										{item.name} x {item.quantity} - $
 										{(item.quantity * item.price).toFixed(2)}
 									</Text>
+									<IconButton
+										accessibilityLabel='Delete Item'
+										icon='cancel'
+										size='sm'
+										iconColor='red'
+									/>
 								</Box>
 							))}
 
