@@ -74,6 +74,13 @@ class Brews extends Component {
 		}
 	};
 
+	deleteItemFromCart = itemToDeleteId => {
+		const filteredItems = this.state.cartItems.filter(
+			item => item._id !== itemToDeleteId
+		);
+		this.setState({ cartItems: filteredItems });
+	};
+
 	render() {
 		const { brand, brews, cartItems } = this.state;
 
@@ -182,6 +189,7 @@ class Brews extends Component {
 										icon='cancel'
 										size='sm'
 										iconColor='red'
+										onClick={() => this.deleteItemFromCart(item._id)}
 									/>
 								</Box>
 							))}
