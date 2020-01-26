@@ -12,7 +12,7 @@ import {
 } from 'gestalt';
 import { Link } from 'react-router-dom';
 
-import { calculatePrice } from '../utils';
+import { calculatePrice, setCart, getCart } from '../utils';
 
 const apiUrl = process.env.API_URL || 'http://localhost:1337/';
 const strapi = new Strapi(apiUrl);
@@ -51,7 +51,8 @@ class Brews extends Component {
 			// console.log(response);
 			this.setState({
 				brews: response.data.brand.brews,
-				brand: response.data.brand.name
+				brand: response.data.brand.name,
+				cartItems: getCart()
 			});
 		} catch (err) {
 			console.error(err);
@@ -68,11 +69,11 @@ class Brews extends Component {
 				...brew,
 				quantity: 1
 			});
-			this.setState({ cartItems: updatedItems });
+			this.setState({ cartItems: updatedItems }, () => setCart(updatedItems));
 		} else {
 			const updatedItems = [...this.state.cartItems];
 			updatedItems[alreadyInCart].quantity += 1;
-			this.setState({ cartItems: updatedItems });
+			this.setState({ cartItems: updatedItems }, () => setCart(updatedItems));
 		}
 	};
 
