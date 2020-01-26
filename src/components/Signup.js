@@ -8,7 +8,7 @@ class Signup extends Component {
 				<Box
 					dangerouslySetInlineStyle={{
 						__style: {
-							backgroundcolor: '#ebe2da'
+							backgroundColor: '#ebe2da'
 						}
 					}}
 					margin={4}
@@ -61,6 +61,7 @@ class Signup extends Component {
 							placeholder='Password'
 							onChange={this.handlechange}
 						/>
+						<Button color='blue' text='Submit' type='submit' />
 					</form>
 				</Box>
 			</Container>
