@@ -61,7 +61,7 @@ class Signup extends Component {
 							placeholder='Password'
 							onChange={this.handlechange}
 						/>
-						<Button color='blue' text='Submit' type='submit' />
+						<Button inline color='blue' text='Submit' type='submit' />
 					</form>
 				</Box>
 			</Container>
