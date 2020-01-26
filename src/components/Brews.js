@@ -81,7 +81,7 @@ class Brews extends Component {
 		const filteredItems = this.state.cartItems.filter(
 			item => item._id !== itemToDeleteId
 		);
-		this.setState({ cartItems: filteredItems });
+		this.setState({ cartItems: filteredItems }, () => setCart(filteredItems));
 	};
 
 	render() {
