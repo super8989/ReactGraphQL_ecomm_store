@@ -12,6 +12,8 @@ import {
 } from 'gestalt';
 import { Link } from 'react-router-dom';
 
+import { calculatePrice } from '../utils';
+
 const apiUrl = process.env.API_URL || 'http://localhost:1337/';
 const strapi = new Strapi(apiUrl);
 
@@ -205,7 +207,7 @@ class Brews extends Component {
 										<Text color='red'>Please select items</Text>
 									)}
 								</Box>
-								<Text size='lg'>Total: $3.99</Text>
+								<Text size='lg'>Total: {calculatePrice(cartItems)}</Text>
 								<Text>
 									<Link to='/checkout'>Checkout</Link>
 								</Text>
