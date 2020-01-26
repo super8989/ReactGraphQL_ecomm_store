@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import Strapi from 'strapi-sdk-javascript/build/main';
-import { Box, Heading, Text, Image, Card, Button, Mask } from 'gestalt';
+import {
+	Box,
+	Heading,
+	Text,
+	Image,
+	Card,
+	Button,
+	Mask,
+	IconButton
+} from 'gestalt';
 import { Link } from 'react-router-dom';
 
 const apiUrl = process.env.API_URL || 'http://localhost:1337/';
@@ -161,7 +170,16 @@ class Brews extends Component {
 								{cartItems.length} item selected
 							</Text>
 
-							{/* Cart Items (will add) */}
+							{/* Cart Items */}
+							{cartItems.map(item => (
+								<Box key={item._id} display='flex' alignItems='center'>
+									<Text>
+										{item.name} x {item.quantity} - $
+										{(item.quantity * item.price).toFixed(2)}
+									</Text>
+								</Box>
+							))}
+
 							<Box
 								display='flex'
 								alignItems='center'
