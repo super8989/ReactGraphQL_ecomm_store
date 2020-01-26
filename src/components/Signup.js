@@ -37,6 +37,30 @@ class Signup extends Component {
 								Sign up to order some brews!
 							</Text>
 						</Box>
+						{/* Username Input */}
+						<TextField
+							id='username'
+							type='text'
+							name='username'
+							placeholder='Username'
+							onChange={this.handlechange}
+						/>
+						{/* Email Address Input */}
+						<TextField
+							id='email'
+							type='email'
+							name='email'
+							placeholder='Email'
+							onChange={this.handlechange}
+						/>
+						{/* Password Input */}
+						<TextField
+							id='password'
+							type='password'
+							name='password'
+							placeholder='Password'
+							onChange={this.handlechange}
+						/>
 					</form>
 				</Box>
 			</Container>
