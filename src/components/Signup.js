@@ -14,6 +14,12 @@ class Signup extends Component {
 		this.setState({ [event.target.name]: value });
 	};
 
+	handleSubmit = event => {
+		event.preventDefault();
+
+		console.log('submitted');
+	};
+
 	render() {
 		return (
 			<Container>
@@ -36,6 +42,7 @@ class Signup extends Component {
 							textAlign: 'center',
 							maxWidth: 450
 						}}
+						onSubmit={this.handleSubmit}
 					>
 						{/* Sign Up Form Heading */}
 						<Box
