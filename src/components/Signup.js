@@ -17,7 +17,13 @@ class Signup extends Component {
 	handleSubmit = event => {
 		event.preventDefault();
 
-		console.log('submitted');
+		if (!this.isFormEmpty(this.state)) {
+			console.log('submitted');
+		}
+	};
+
+	isFormEmpty = ({ username, email, password }) => {
+		return !username || !email || !password;
 	};
 
 	render() {
