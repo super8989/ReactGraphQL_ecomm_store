@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Box, Button, Heading, Text, TextField } from 'gestalt';
+import {
+	Container,
+	Box,
+	Button,
+	Heading,
+	Text,
+	TextField,
+	Modal,
+	Spinner
+} from 'gestalt';
 
 import ToastMessage from './ToastMessage';
 import { getCart, calculatePrice } from '../utils';
@@ -12,7 +21,9 @@ class Checkout extends Component {
 		city: '',
 		confirmationEmailAddress: '',
 		toast: false,
-		toastMessage: ''
+		toastMessage: '',
+		orderProcessing: false,
+		modal: true
 	};
 
 	componentDidMount() {
@@ -34,6 +45,8 @@ class Checkout extends Component {
 		}
 	};
 
+	handleSubmitOrder = () => {};
+
 	isFormEmpty = ({ address, postalCode, city, confirmationEmailAddress }) => {
 		return !address || !postalCode || !city || !confirmationEmailAddress;
 	};
@@ -43,8 +56,16 @@ class Checkout extends Component {
 		setTimeout(() => this.setState({ toast: false, toastMessage: '' }), 3000);
 	};
 
+	closeModal = () => this.setState({ modal: false });
+
 	render() {
-		const { toast, toastMessage, cartItems } = this.state;
+		const {
+			toast,
+			toastMessage,
+			cartItems,
+			orderProcessing,
+			modal
+		} = this.state;
 
 		return (
 			<Container>
@@ -149,10 +170,62 @@ class Checkout extends Component {
 						</Box>
 					)}
 				</Box>
+				{/* Confirmation Modal */}
+				{modal && (
+					<ConfirmationModal
+						orderProcessing={orderProcessing}
+						cartItems={cartItems}
+						closeModal={this.closeModal}
+						handleSubmitOrder={this.handleSubmitOrder}
+					/>
+				)}
 				<ToastMessage show={toast} message={toastMessage} />
 			</Container>
 		);
 	}
 }
+
+const ConfirmationModal = ({
+	orderProcessing,
+	cartItems,
+	closeModal,
+	handleSubmitOrder
+}) => (
+	<Modal
+		accessibilityCloseLabel='close'
+		accessibilityModalLabel='Confirm Your Order'
+		heading='Confirm Your Order'
+		onDismiss={closeModal}
+		footer={
+			<Box
+				display='flex'
+				marginRight={-1}
+				marginLeft={-1}
+				justifyContent='center'
+			>
+				<Box padding={1}>
+					<Button
+						size='lg'
+						color='blue'
+						text='Submit'
+						disabled={orderProcessing}
+						onClick={handleSubmitOrder}
+					/>
+				</Box>
+				<Box padding={1}>
+					<Button
+						size='lg'
+						color='red'
+						text='Cancel'
+						disabled={orderProcessing}
+						onClick={closeModal}
+					/>
+				</Box>
+			</Box>
+		}
+		role='alertdialog'
+		size='sm'
+	></Modal>
+);
 
 export default Checkout;
