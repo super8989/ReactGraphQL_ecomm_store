@@ -23,7 +23,7 @@ class Checkout extends Component {
 		toast: false,
 		toastMessage: '',
 		orderProcessing: false,
-		modal: true
+		modal: false
 	};
 
 	componentDidMount() {
@@ -43,6 +43,8 @@ class Checkout extends Component {
 			this.showToast('Fill in all fields');
 			return;
 		}
+
+		this.setState({ modal: true });
 	};
 
 	handleSubmitOrder = () => {};
@@ -248,6 +250,19 @@ const ConfirmationModal = ({
 						Total: {calculatePrice(cartItems)}
 					</Text>
 				</Box>
+			</Box>
+		)}
+
+		{/* Order Processing Spinner */}
+		<Spinner
+			show={orderProcessing}
+			accessibilityLabel='Order Processing Spinner'
+		/>
+		{orderProcessing && (
+			<Box margin={4}>
+				<Text align='center' italic>
+					Relax and sip some coffee.. ☕️
+				</Text>
 			</Box>
 		)}
 	</Modal>
