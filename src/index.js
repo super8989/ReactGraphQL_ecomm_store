@@ -18,23 +18,26 @@ import { getToken } from './utils';
 import 'gestalt/dist/gestalt.css';
 import * as serviceWorker from './serviceWorker';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-	<Route
-		{...rest}
-		render={props =>
-			getToken() !== null ? (
-				<Component {...props} />
-			) : (
-				<Redirect
-					to={{
-						pathname: '/signin',
-						state: { from: props.location }
-					}}
-				/>
-			)
-		}
-	/>
-);
+const PrivateRoute = ({ component: Component, ...rest }) => {
+	console.log({ component: Component, ...rest });
+	return (
+		<Route
+			{...rest}
+			render={props =>
+				getToken() !== null ? (
+					<Component {...props} />
+				) : (
+					<Redirect
+						to={{
+							pathname: '/signin',
+							state: { from: props.location }
+						}}
+					/>
+				)
+			}
+		/>
+	);
+};
 
 const Root = () => (
 	<Router>
