@@ -19,7 +19,7 @@ class Checkout extends Component {
 		this.setState({ [event.target.name]: value });
 	};
 
-	handleSubmit = async event => {
+	handleConfirmOrder = async event => {
 		event.preventDefault();
 
 		if (this.isFormEmpty(this.state)) {
