@@ -3,13 +3,18 @@ import { Container, Box, Button, Heading, Text, TextField } from 'gestalt';
 
 import ToastMessage from './ToastMessage';
 
+import Strapi from 'strapi-sdk-javascript/build/main';
+const apiUrl = process.env.API_URL || 'http://localhost:1337/';
+const strapi = new Strapi(apiUrl);
+
 class Signup extends Component {
 	state = {
 		username: '',
 		email: '',
 		password: '',
 		toast: false,
-		toastMessage: ''
+		toastMessage: '',
+		loading: false
 	};
 
 	handleChange = ({ event, value }) => {
@@ -18,15 +23,31 @@ class Signup extends Component {
 		this.setState({ [event.target.name]: value });
 	};
 
-	handleSubmit = event => {
+	handleSubmit = async event => {
 		event.preventDefault();
+		const { username, email, password } = this.state;
 
 		if (this.isFormEmpty(this.state)) {
 			this.showToast('Fill in all fields');
 			return;
 		}
-		console.log('submitted');
+
+		// Sign up user
+		try {
+			this.setState({ loading: true });
+			const response = await strapi.register(username, email, password);
+			this.setState({ loading: false });
+
+			console.log('this is reponse:' + response);
+			this.redirectUser('/');
+		} catch (err) {
+			console.log('this is error:' + err);
+			this.setState({ loading: false });
+			this.showToast(err.message);
+		}
 	};
+
+	redirectUser = path => this.props.history.push(path);
 
 	isFormEmpty = ({ username, email, password }) => {
 		return !username || !email || !password;
