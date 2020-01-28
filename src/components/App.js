@@ -42,7 +42,7 @@ class App extends Component {
 					}`
 				}
 			});
-			console.log(response);
+			console.log(`this is response graphQL: ${response}`);
 			this.setState({ brands: response.data.brands, loadingBrands: false });
 		} catch (err) {
 			console.error(err);

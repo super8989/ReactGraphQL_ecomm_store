@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Box, Button, Heading, Text, TextField } from 'gestalt';
 
 import ToastMessage from './ToastMessage';
+import { setToken } from '../utils';
 
 import Strapi from 'strapi-sdk-javascript/build/main';
 const apiUrl = process.env.API_URL || 'http://localhost:1337/';
@@ -37,11 +38,12 @@ class Signup extends Component {
 			this.setState({ loading: true });
 			const response = await strapi.register(username, email, password);
 			this.setState({ loading: false });
+			setToken(response.jwt);
 
-			console.log('this is reponse:' + response);
+			console.log(response);
 			this.redirectUser('/');
 		} catch (err) {
-			console.log('this is error:' + err);
+			console.log(err);
 			this.setState({ loading: false });
 			this.showToast(err.message);
 		}
@@ -59,7 +61,7 @@ class Signup extends Component {
 	};
 
 	render() {
-		const { toastMessage, toast } = this.state;
+		const { toastMessage, toast, loading } = this.state;
 
 		return (
 			<Container>
@@ -120,7 +122,13 @@ class Signup extends Component {
 							placeholder='Password'
 							onChange={this.handleChange}
 						/>
-						<Button inline color='blue' text='Submit' type='submit' />
+						<Button
+							inline
+							disabled={loading}
+							color='blue'
+							text='Submit'
+							type='submit'
+						/>
 					</form>
 				</Box>
 				<ToastMessage show={toast} message={toastMessage} />
