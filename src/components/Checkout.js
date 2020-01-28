@@ -225,7 +225,32 @@ const ConfirmationModal = ({
 		}
 		role='alertdialog'
 		size='sm'
-	></Modal>
+	>
+		{/* Order Summary */}
+		{!orderProcessing && (
+			<Box
+				display='flex'
+				justifyContent='center'
+				alignItems='center'
+				direction='column'
+				padding={2}
+				color='lightWash'
+			>
+				{cartItems.map(item => (
+					<Box key={item._id} padding={1}>
+						<Text size='lg' color='red'>
+							{item.name} x {item.quantity} - ${item.quantity * item.price}
+						</Text>
+					</Box>
+				))}
+				<Box paddingY={2}>
+					<Text size='lg' weight='bold'>
+						Total: {calculatePrice(cartItems)}
+					</Text>
+				</Box>
+			</Box>
+		)}
+	</Modal>
 );
 
 export default Checkout;
