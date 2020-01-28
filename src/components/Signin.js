@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Box, Button, Heading, Text, TextField } from 'gestalt';
+import { Container, Box, Button, Heading, TextField } from 'gestalt';
 
 import ToastMessage from './ToastMessage';
 import { setToken } from '../utils';
