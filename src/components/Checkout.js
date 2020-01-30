@@ -17,7 +17,7 @@ import {
 } from 'react-stripe-elements';
 
 import ToastMessage from './ToastMessage';
-import { getCart, calculatePrice } from '../utils';
+import { getCart, calculatePrice, clearCart, calculateAmount } from '../utils';
 
 const STRIPE_API_KEY = process.env.REACT_APP_STRIPE_KEY;
 
@@ -55,7 +55,24 @@ class _CheckoutForm extends Component {
 		this.setState({ modal: true });
 	};
 
-	handleSubmitOrder = () => {};
+	handleSubmitOrder = () => {
+		const { cartItems, city, address, postalCode } = this.state;
+
+		//Process order
+		this.setState({ orderProcessing: true });
+		let token;
+
+		try {
+			// create stripe token
+			// create order with strapi sdk (make request to backend)
+			// set orderProcessing to false and set modal to false
+			// clear user cart of brews
+			// show success toast
+		} catch (err) {
+			// set orderProcessing to false and modal to false
+			// show error toast
+		}
+	};
 
 	isFormEmpty = ({ address, postalCode, city, confirmationEmailAddress }) => {
 		return !address || !postalCode || !city || !confirmationEmailAddress;
