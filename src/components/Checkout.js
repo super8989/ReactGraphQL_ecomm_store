@@ -15,9 +15,14 @@ import {
 	CardElement,
 	injectStripe
 } from 'react-stripe-elements';
+import { withRouter } from 'react-router-dom';
 
 import ToastMessage from './ToastMessage';
 import { getCart, calculatePrice, clearCart, calculateAmount } from '../utils';
+
+import Strapi from 'strapi-sdk-javascript/build/main';
+const apiUrl = process.env.API_URL || 'http://localhost:1337/';
+const strapi = new Strapi(apiUrl);
 
 const STRIPE_API_KEY = process.env.REACT_APP_STRIPE_KEY;
 
@@ -55,22 +60,33 @@ class _CheckoutForm extends Component {
 		this.setState({ modal: true });
 	};
 
-	handleSubmitOrder = () => {
+	handleSubmitOrder = async () => {
 		const { cartItems, city, address, postalCode } = this.state;
+
+		const amount = calculateAmount(cartItems);
 
 		//Process order
 		this.setState({ orderProcessing: true });
 		let token;
 
 		try {
-			// create stripe token
-			// create order with strapi sdk (make request to backend)
-			// set orderProcessing to false and set modal to false
-			// clear user cart of brews
-			// show success toast
+			const response = await this.props.stripe.createToken();
+			token = response.token.id;
+
+			await strapi.createEntry('orders', {
+				amount,
+				brews: cartItems,
+				city,
+				postalCode,
+				address,
+				token
+			});
+			this.setState({ orderProcessing: false, modal: false });
+			clearCart();
+			this.showToast('Your order has been successfully submitted!', true);
 		} catch (err) {
-			// set orderProcessing to false and modal to false
-			// show error toast
+			this.setState({ orderProcessing: false, modal: false });
+			this.showToast(err.message);
 		}
 	};
 
@@ -78,9 +94,17 @@ class _CheckoutForm extends Component {
 		return !address || !postalCode || !city || !confirmationEmailAddress;
 	};
 
-	showToast = toastMessage => {
+	showToast = (toastMessage, redirect = false) => {
 		this.setState({ toast: true, toastMessage });
-		setTimeout(() => this.setState({ toast: false, toastMessage: '' }), 3000);
+		setTimeout(
+			() =>
+				this.setState(
+					{ toast: false, toastMessage: '' },
+					// if true passed to 'redirect' argument and redirected to home
+					() => redirect && this.props.history.push('/')
+				),
+			3000
+		);
 	};
 
 	closeModal = () => this.setState({ modal: false });
@@ -298,7 +322,7 @@ const ConfirmationModal = ({
 	</Modal>
 );
 
-const CheckoutForm = injectStripe(_CheckoutForm);
+const CheckoutForm = withRouter(injectStripe(_CheckoutForm));
 
 const Checkout = () => (
 	<StripeProvider apiKey={STRIPE_API_KEY}>
