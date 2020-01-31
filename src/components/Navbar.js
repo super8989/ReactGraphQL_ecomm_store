@@ -48,9 +48,12 @@ const AuthNav = ({ handleSignout }) => (
 						src='./icons/logo.svg'
 					/>
 				</Box>
-				<Heading size='xs' color='lightGray'>
-					Sam's Brewery
-				</Heading>
+				{/* Title */}
+				<div className='main-title'>
+					<Heading size='xs' color='lightGray'>
+						Sam's Brewery
+					</Heading>
+				</div>
 			</Box>
 		</NavLink>
 
@@ -93,9 +96,12 @@ const UnAuthNav = () => (
 						src='./icons/logo.svg'
 					/>
 				</Box>
-				<Heading size='xs' color='lightGray'>
-					Sam's Brewery
-				</Heading>
+				{/* Title */}
+				<div className='main-title'>
+					<Heading size='xs' color='lightGray'>
+						Sam's Brewery
+					</Heading>
+				</div>
 			</Box>
 		</NavLink>
 
