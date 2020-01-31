@@ -139,15 +139,20 @@ class Brews extends Component {
 										justifyContent='center'
 										direction='column'
 									>
-										<Box marginBottom={2}>
+										<Box margin={2}>
 											<Text weight='bold' size='xl'>
 												{brew.name}
 											</Text>
 										</Box>
-										<Text>{brew.description}</Text>
-										<Text color='darkGray'>${brew.price}</Text>
-
+										<Box height={150}>
+											<Text align='center'>{brew.description}</Text>
+										</Box>
 										<Box marginTop={2}>
+											<Box marginBottom={4}>
+												<Text align='center' color='darkGray' marginTop={2}>
+													${brew.price}
+												</Text>
+											</Box>
 											<Text weight='bold' size='xl'>
 												<Button
 													onClick={() => this.addToCart(brew)}

@@ -153,13 +153,19 @@ class App extends Component {
 									justifyContent='center'
 									direction='column'
 								>
-									<Text weight='bold' size='xl'>
-										{brand.name}
-									</Text>
-									<Text>{brand.description}</Text>
-									<Text weight='bold' size='xl'>
-										<Link to={`/${brand._id}`}>See Brews</Link>
-									</Text>
+									<Box margin={2}>
+										<Text weight='bold' size='xl'>
+											{brand.name}
+										</Text>
+									</Box>
+									<Box>
+										<Text align='center'>{brand.description}</Text>
+									</Box>
+									<Box marginTop={4}>
+										<Text weight='bold' size='xl'>
+											<Link to={`/${brand._id}`}>See Brews</Link>
+										</Text>
+									</Box>
 								</Box>
 							</Card>
 						</Box>
