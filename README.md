@@ -37,4 +37,4 @@
 
 ## Demo
 
-<a href='https://reactgraphqlecommstore.super8989.now.sh/' target="_blank">Sam's Brewery</a>
+<a href='https://reactgraphqlecommstore.super8989.now.sh/' target='_blank'>Sam's Brewery</a>
